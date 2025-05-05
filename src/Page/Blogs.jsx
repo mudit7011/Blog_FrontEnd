@@ -29,20 +29,20 @@ function Blogs() {
     }
   };
 
-  const editAll = async()=>{
-    const data = {
-      domain:"kusheldigi.com"
-    }
-    blogs.forEach(async(e,i) => {
-      const response = await axios.post(`https://backblog.kusheldigi.com/api/v1/auth/editBlog/${e._id}`, data, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+  // const editAll = async()=>{
+  //   const data = {
+  //     domain:"kusheldigi.com"
+  //   }
+  //   blogs.forEach(async(e,i) => {
+  //     const response = await axios.post(`https://backblog.kusheldigi.com/api/v1/auth/editBlog/${e._id}`, data, {
+  //       headers: { "Content-Type": "multipart/form-data" },
+  //     });
 
-      if(response.status === 200){
-        console.log("Update, ",i)
-      }
-    })
-  }
+  //     if(response.status === 200){
+  //       console.log("Update, ",i)
+  //     }
+  //   })
+  // }
 
   const deleteBlog = async (blogId) => {
     try {
