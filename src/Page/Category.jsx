@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Category() {
   const [blogs, setBlogs] = useState([]);
@@ -14,7 +14,9 @@ function Category() {
 
   const fetchBlogs = async () => {
     try {
-      const response = await axios.get('https://backblog.kusheldigi.com/api/v1/auth/categories');
+      const response = await axios.get(
+        "https://backblog.kusheldigi.com/api/v1/auth/categories"
+      );
       setBlogs(response?.data?.categories);
     } catch (error) {
       console.error("Error fetching blogs:", error);
@@ -23,28 +25,44 @@ function Category() {
 
   const deleteBlog = async (categoryId) => {
     try {
-      const response = await axios.delete(`https://backblog.kusheldigi.com/api/v1/auth/categories/${categoryId}`);
-     
+      const response = await axios.delete(
+        `https://backblog.kusheldigi.com/api/v1/auth/categories/${categoryId}`
+      );
+
+      if (response.status === 200) {
         alert("Blog deleted successfully");
-        // setBlogs(blogs.filter((blog) => blog._id !== categoryId));
         fetchBlogs();
+      } else {
+        alert("Unexpected response. Blog may not be deleted.");
+      }
     } catch (error) {
-      console.error("Error deleting blog:", error);
-      alert("Failed to delete blog");
+      if (error.response) {
+        alert(
+          `Server responded with ${error.response.status}: ${
+            error.response.data.message || "Error"
+          }`
+        );
+      } else if (error.request) {
+        alert("No response from server.");
+      } else {
+        alert("Error setting up the request.");
+      }
     }
   };
 
   return (
     <div>
-      <h2 style={{ textAlign: 'center' }}>All Category</h2>
+      <h2 style={{ textAlign: "center" }}>All Category</h2>
       <div className="blogs-container">
         {blogs?.map((blog) => (
           <div key={blog._id} className="blog-box">
             <h3 className="blog-title">{blog?.title}</h3>
-           
+
             <div className="button-container">
               <button onClick={() => deleteBlog(blog._id)}>Delete</button>
-              <button onClick={() => navigate(`/editCatgory/${blog?._id}`)}>Edit</button> 
+              <button onClick={() => navigate(`/editCatgory/${blog?._id}`)}>
+                Edit
+              </button>
             </div>
           </div>
         ))}
