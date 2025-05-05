@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { useDropzone } from "react-dropzone";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { Select } from "@mui/material";
+// import { Select } from "@mui/material";
 
 const MyDropzone = ({ onFilesSelected }) => {
   const { getRootProps, getInputProps } = useDropzone({

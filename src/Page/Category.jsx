@@ -6,7 +6,7 @@ function Category() {
   const [blogs, setBlogs] = useState([]);
   const navigate = useNavigate();
 
-  const [refreshFlag,setRefreshFlag] = useState(false);
+  // const [refreshFlag,setRefreshFlag] = useState(false);
 
   useEffect(() => {
     fetchBlogs();
